@@ -99,48 +99,6 @@
             border: none;
             background-color: #000;
         }
-
-        /* Ad & Popup Blocker Notification */
-        .popup-notice {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(20, 20, 20, 0.95);
-            padding: 15px 25px;
-            border-top: 3px solid var(--primary-color);
-            border-radius: 8px;
-            font-size: 0.95rem;
-            z-index: 20;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .popup-notice p {
-            margin: 0;
-            color: #ddd;
-        }
-
-        .popup-notice strong {
-            color: white;
-        }
-
-        .close-btn {
-            background: #333;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .close-btn:hover {
-            background: #555;
-        }
     </style>
 </head>
 <body>
@@ -156,28 +114,18 @@
 
     <div class="main-container">
         <!-- 
-            The 'sandbox' attribute below restricts the embedded site from:
-            1. Opening pop-ups
-            2. Redirecting your top-level browser window to ad sites
-            3. Automatically downloading files
+            Sandbox attribute removed to allow the third-party player to load its security scripts.
+            Pop-up blocking must now be handled by iPad Safari Settings or an AdBlocker extension.
         -->
         <iframe 
             id="videoPlayer" 
             src="https://socialtoolsbyhashim.site/empireflix.php/"
-            sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"
             allowfullscreen>
         </iframe>
-
-        <!-- Non-intrusive Ad Blocker Notice -->
-        <div class="popup-notice" id="adNotice">
-            <p><strong>🛡️ Pop-up Protection Active:</strong> Intrusive ads, new tabs, and redirects have been blocked by the app sandbox for a smooth experience.</p>
-            <button class="close-btn" onclick="dismissNotice()">Got it</button>
-        </div>
     </div>
 
     <script>
         const iframe = document.getElementById('videoPlayer');
-        const notice = document.getElementById('adNotice');
 
         // Function to refresh the iframe if a stream gets stuck
         function reloadStream() {
@@ -205,18 +153,6 @@
                 iframe.msRequestFullscreen();
             }
         }
-
-        // Function to manually dismiss the notice
-        function dismissNotice() {
-            notice.style.opacity = '0';
-            notice.style.transform = 'translate(-50%, 20px)';
-            setTimeout(() => notice.style.display = 'none', 500);
-        }
-
-        // Auto-hide the notice after 8 seconds
-        setTimeout(() => {
-            dismissNotice();
-        }, 8000);
     </script>
 
 </body>
